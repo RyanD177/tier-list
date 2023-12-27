@@ -22,7 +22,7 @@ h1 {
   border-top: none;
 }
 
-.drop_zone {
+.drop-zone {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -41,7 +41,7 @@ h1 {
 }
 
 #unranked-section {
-  margin-top: 18px;
+  margin-top: 50px;
 }
 #blue {
   background-color: blue;

@@ -1,21 +1,51 @@
-const coloredSquare = document.querySelectorAll('item').forEach(setupItem);
+let draggedItem;
+document.querySelectorAll(".item").forEach(setupItem);
+document.querySelectorAll('.drop-zone').forEach(setUpDropZone)
 
-function dropZone() {
-    addEventListener("drag", (event) => {
-
-    });
-addEventListener("dragover", (event) => {
-
-});
+function setupItem (item) {
+    item.addEventListener("dragstart", onDragItem);
+    item.addEventListener("dblclick", onDoubleClick);
 
 }
 
-function setupItem () {
 
-    addEventListener("dragstart", (event) => {
-        console.log('drag start working ')
-    });
+function setUpDropZone (dropZone) {
+    dropZone.addEventListener("drop", onDropOverDropZone  );
+    dropZone.addEventListener("dragover", onDragOverDropZone );
+
 }
 
-// Call the function to set up the event listeners
-setupItem();
+
+
+function onDragItem (event){
+    draggedItem = event.target;
+ 
+ }
+
+ 
+function onDoubleClick () {
+    const unrankedDropZone = document.getElementById('unranked-drop-zone')
+
+    if(unrankedDropZone !== this.parentNode){
+        unrankedDropZone.appendChild(this);
+    }
+}
+
+
+
+function onDropOverDropZone () {
+    if(this !== draggedItem.parentNode){
+        this.appendChild(draggedItem);
+    }
+   
+}
+
+
+
+
+
+
+function onDragOverDropZone (event) {
+    event.preventDefault();
+
+}

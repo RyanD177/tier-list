@@ -1,51 +1,36 @@
 let draggedItem;
-document.querySelectorAll(".item").forEach(setupItem);
-document.querySelectorAll('.drop-zone').forEach(setUpDropZone)
+document.querySelectorAll(".item").forEach(setUpItem);
+document.querySelectorAll(".drop-zone").forEach(setUpDropZone);
 
-function setupItem (item) {
-    item.addEventListener("dragstart", onDragItem);
-    item.addEventListener("dblclick", onDoubleClick);
 
+
+function setUpItem(item) {
+  item.addEventListener("dragstart", onDragItem);
+  item.addEventListener("dblclick", ondblclick)
 }
 
-
-function setUpDropZone (dropZone) {
-    dropZone.addEventListener("drop", onDropOverDropZone  );
-    dropZone.addEventListener("dragover", onDragOverDropZone );
-
+function setUpDropZone(dropZone) {
+  dropZone.addEventListener("drop", onDropOverDropZone);
+  dropZone.addEventListener("dragover", onDragOverDropZone);
 }
 
+function onDragItem(event) {
+  draggedItem = event.target;
+}
 
+function onDragOverDropZone(event) {
+  event.preventDefault();
+}
 
-function onDragItem (event){
-    draggedItem = event.target;
- 
- }
+function onDropOverDropZone() {
+  if (this !== draggedItem.parentNode) {
+    this.appendChild(draggedItem);
+  }
+}
 
- 
-function onDoubleClick () {
-    const unrankedDropZone = document.getElementById('unranked-drop-zone')
-
-    if(unrankedDropZone !== this.parentNode){
-        unrankedDropZone.appendChild(this);
+function ondblclick () {
+const unrankedZone = document.getElementById('unranked-drop-zone') 
+    if(unrankedZone !== this.parentNode){
+        unrankedZone.appendChild(this)
     }
-}
-
-
-
-function onDropOverDropZone () {
-    if(this !== draggedItem.parentNode){
-        this.appendChild(draggedItem);
-    }
-   
-}
-
-
-
-
-
-
-function onDragOverDropZone (event) {
-    event.preventDefault();
-
 }
